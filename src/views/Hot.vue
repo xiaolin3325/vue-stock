@@ -1,28 +1,15 @@
 <template>
   <div>
     <div>
-      <div class="block">
+      <div>
         <el-row>
           <span class="demonstration" style="padding: 0 10px">交易日期</span>
-          <el-date-picker
-            style="padding: 0 10px"
-            v-model="tradedate"
-            align="right"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择日期"
-            @change="changeDate"
-          >
+          <el-date-picker style="padding: 0 10px" v-model="tradedate" align="right" type="date"
+            value-format="yyyy-MM-dd" placeholder="选择日期" @change="changeDate">
           </el-date-picker>
-          <el-input
-            v-model="filter"
-            placeholder="所属版块"
-            style="width: 150px; padding: 0 10px"
-          ></el-input>
+          <el-input v-model="filter" placeholder="所属版块" style="width: 150px; padding: 0 10px"></el-input>
           <el-checkbox v-model="isshit">不含ST</el-checkbox>
-          <el-checkbox v-model="type" style="padding: 0 10px"
-            >跌停板</el-checkbox
-          >
+          <el-checkbox v-model="type" style="padding: 0 10px">跌停板</el-checkbox>
           <el-button @click="load">查询</el-button>
           <el-button @click="sync">同步涨跌停数据</el-button>
           <el-button @click="update">同步补充数据</el-button>
@@ -31,50 +18,33 @@
       </div>
     </div>
     <div>
-      <el-table
-        v-loading="loading"
-        :data="tableData"
-        style="width: 100%"
-        max-height="1000px"
-        ref="table"
-      >
-        <el-table-column
-          fixed
-          prop="tradedate"
-          label="日期"
-          width="150"
-          sortable
-        >
+      <el-table v-loading="loading" :data="tableData" style="width: 100%" max-height="735px" ref="table">
+        <el-table-column fixed prop="tradedate" label="日期" width="150" sortable>
         </el-table-column>
-        <el-table-column prop="code" label="股票代码" width="120">
+        <el-table-column prop="code" label="股票代码">
         </el-table-column>
-        <el-table-column prop="name" label="股票名称" width="120">
+        <el-table-column prop="name" label="股票名称">
         </el-table-column>
-        <el-table-column prop="continuity" label="连板数" width="120" sortable>
+        <el-table-column prop="continuity" label="连板数" width="100" sortable>
         </el-table-column>
         <el-table-column prop="continuity7" label="20天N板" width="120" sortable>
         </el-table-column>
         <el-table-column prop="ztdate" label="涨停时间" width="120" sortable>
         </el-table-column>
 
-        <el-table-column prop="close" label="收盘价" width="120">
+        <el-table-column prop="close" label="收盘价" width="80">
         </el-table-column>
         <el-table-column prop="pchchange" label="涨跌幅" width="120">
         </el-table-column>
-        <el-table-column
-          prop="amount"
-          label="成交额"
-          width="140"
-          :formatter="stateFormat"
-        >
+        <el-table-column prop="amount" label="成交额" width="140" :formatter="stateFormat">
         </el-table-column>
-        <el-table-column prop="amplitude" label="振幅" width="120">
+        <el-table-column prop="amplitude" label="振幅" width="80">
         </el-table-column>
-        <el-table-column prop="turnover" label="换手率" width="120">
+        <el-table-column prop="turnover" label="换手率" width="80">
         </el-table-column>
         <el-table-column prop="fivechange" label="五日涨跌幅" width="120">
         </el-table-column>
-        <el-table-column prop="belong" label="所属版块" width="300">
+        <el-table-column prop="belong" label="所属版块" width="180">
         </el-table-column>
         <el-table-column label="操作" width="180">
           <template slot-scope="scope">
@@ -84,15 +54,9 @@
       </el-table>
     </div>
     <div style="padding: 10px 0">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage"
-        :page-sizes="[10, 20, 50, 100]"
-        :page-size="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      >
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+        :page-sizes="[10, 20, 50, 100]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
       </el-pagination>
     </div>
 
@@ -167,22 +131,22 @@ export default {
       });
     },
     sync() {
-      console.log(this.tradedate.replace(/-/g,''));
-      axios.get("/stock/zt/" + this.tradedate.replace(/-/g,'')).then((res) => {
+      console.log(this.tradedate.replace(/-/g, ''));
+      axios.get("/stock/zt/" + this.tradedate.replace(/-/g, '')).then((res) => {
         console.log(res);
       });
-      axios.get("/stock/dt/" + this.tradedate.replace(/-/g,'')).then((res) => {
+      axios.get("/stock/dt/" + this.tradedate.replace(/-/g, '')).then((res) => {
         console.log(res);
       });
     },
     update() {
       axios
-        .get("/stock/updatetc?type=dt&tradedate=" + this.tradedate.replace(/-/g,''))
+        .get("/stock/updatetc?type=dt&tradedate=" + this.tradedate.replace(/-/g, ''))
         .then((res) => {
           console.log(res);
         });
       axios
-        .get("/stock/updatetc?type=zt&tradedate=" + this.tradedate.replace(/-/g,''))
+        .get("/stock/updatetc?type=zt&tradedate=" + this.tradedate.replace(/-/g, ''))
         .then((res) => {
           console.log(res);
         });
