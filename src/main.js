@@ -8,7 +8,7 @@ import axios from 'axios'
 import * as Echarts from 'echarts'
 Vue.prototype.$echarts = Echarts
 Vue.prototype.$http = axios
-axios.defaults.baseURL = "http://www.cjpy.top"
+axios.defaults.baseURL = "https://api.cjpy.top"
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 new Vue({

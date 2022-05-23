@@ -64,6 +64,21 @@
 
     <el-dialog title="股票信息" :visible.sync="dialogFormVisible" width="30%">
       <el-form label-width="80px">
+        <el-form-item label="涨停时间">
+          <el-input v-model="form.ztdate" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="成交额">
+          <el-input v-model="form.amount" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="振幅">
+          <el-input v-model="form.amplitude" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="换手率">
+          <el-input v-model="form.turnover" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="五日涨跌额">
+          <el-input v-model="form.fivechange" autocomplete="off"></el-input>
+        </el-form-item>
         <el-form-item label="所属版块">
           <el-input v-model="form.belong" autocomplete="off"></el-input>
         </el-form-item>
