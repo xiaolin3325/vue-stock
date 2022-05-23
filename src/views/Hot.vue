@@ -19,7 +19,7 @@
     </div>
     <div>
       <el-table v-loading="loading" :data="tableData" style="width: 100%" max-height="735px" ref="table">
-        <el-table-column fixed prop="tradedate" label="日期" width="150" sortable>
+        <el-table-column fixed prop="tradedate" label="日期" width="120" sortable>
         </el-table-column>
         <el-table-column prop="code" label="股票代码">
         </el-table-column>
@@ -42,11 +42,13 @@
         </el-table-column>
         <el-table-column prop="turnover" label="换手率" width="80">
         </el-table-column>
-        <el-table-column prop="fivechange" label="五日涨跌幅" width="120">
+        <el-table-column prop="fivechange" label="五日涨跌幅" width="100">
         </el-table-column>
-        <el-table-column prop="belong" label="所属版块" width="180">
+        <el-table-column prop="belong" label="所属版块" width="140">
         </el-table-column>
-        <el-table-column label="操作" width="180">
+        <el-table-column prop="mark" label="备注" width="100">
+        </el-table-column>
+        <el-table-column label="操作" width="100">
           <template slot-scope="scope">
             <el-button type="danger" @click="edit(scope.row)">编辑</el-button>
           </template>
@@ -64,6 +66,9 @@
       <el-form label-width="80px">
         <el-form-item label="所属版块">
           <el-input v-model="form.belong" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="备注">
+          <el-input v-model="form.mark" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
